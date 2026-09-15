@@ -1,0 +1,773 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #070c18;
+    font-family: Outfit, Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+}
+
+#circulo_color1 {
+    background-color: #162342;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(200px);
+    position: fixed;
+    top: 30vh;
+    left: -20vw;
+    pointer-events: none;
+    z-index: 1;
+}
+
+#circulo_color2 {
+    background-color: #201d33;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(200px);
+    position: fixed;
+    top: 5vh;
+    right: -20vw;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@media (min-width: 768px) {
+    #circulo_color1 {
+        width: 500px;
+        height: 500px;
+        left: -15vw;
+    }
+
+    #circulo_color2 {
+        width: 500px;
+        height: 500px;
+        right: -15vw;
+    }
+}
+
+#header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+#estructura_web {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    position: relative;
+    z-index: 10;
+    padding: 0;
+    margin-top: 0;
+}
+
+#pagina_web {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    z-index: 10;
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fondo-inicio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.4;
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+.contenido-inicio {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 1200px;
+    padding: 40px 20px;
+    margin-bottom: 1vh;
+}
+
+#pagina_web_proyectos {
+    width: 90%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    z-index: 10;
+    margin-top: 40px;
+}
+
+#pagina_web_acerca {
+    width: 90%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.acerca-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.parrafo_acerca {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: clamp(16px, 1.1vw, 18px);
+    line-height: 1.8;
+    margin: 0;
+    text-align: center;
+}
+
+.titulo_de_proyectos {
+    font-family: Outfit;
+    color: white;
+    margin: 100px auto 40px auto;
+    width: 100%;
+    text-align: center;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.circulo {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(200px);
+    pointer-events: none;
+}
+
+.titulo_principal {
+    color: #FFF;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: clamp(40px, 6vw, 70px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: left;
+    margin-bottom: -1rem;
+    padding-left: 0px;
+}
+
+.subtitulo_principal {
+    color: #FFF;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: clamp(24px, 4vw, 40px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.parrafo_principal {
+    max-width: 600px;
+    color: #cacaca;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: clamp(16px, 1.5vw, 20px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.fuente_para_header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.texto_amarillo {
+    color: #FBF05B;
+    display: inline-block;
+    animation: saltoPiano 2s ease-in-out infinite;
+}
+
+@keyframes saltoPiano {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.logo_tecnologia_icono {
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logos-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#pagina_web_contacto {
+    width: 90%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    margin-top: 60px;
+    margin: 60px auto 0 auto;
+    padding: 40px;
+    z-index: 10;
+}
+
+.contacto-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.parrafo_contacto {
+    color: #cacaca;
+    text-align: center;
+    font-size: clamp(16px, 1.2vw, 18px);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.formulario-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.grupo-formulario {
+    width: 100%;
+}
+
+.input-contacto {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #FFF;
+    font-family: Outfit;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-contacto::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input-contacto:focus {
+    outline: none;
+    border-color: #FBF05B;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 15px rgba(251, 240, 91, 0.3);
+}
+
+.boton_enviar {
+    background: linear-gradient(135deg, #FBF05B, #FFD700);
+    color: #2D2D3B;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: Outfit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.boton_enviar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(251, 240, 91, 0.4);
+}
+
+.redes-contacto {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.subtitulo_contacto {
+    color: #FFF;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.enlaces-redes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.enlace-red {
+    color: #FBF05B;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: 2px solid #FBF05B;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.enlace-red:hover {
+    background-color: #FBF05B;
+    color: #2D2D3B;
+    transform: translateY(-2px);
+}
+
+.mensaje-exito {
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(251, 240, 91, 0.1);
+    border: 2px solid #FBF05B;
+    border-radius: 8px;
+    animation: fadeIn 0.5s ease;
+}
+
+.mensaje-exito p {
+    color: #FBF05B;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-animation {
+    animation: slideInDown 0.8s ease-out forwards;
+}
+
+@keyframes slideInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nombre-animado {
+    animation: glow-pulse 2s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(251, 240, 91, 0.5);
+}
+
+@keyframes glow-pulse {
+
+    0%,
+    100% {
+        text-shadow: 0 0 10px rgba(251, 240, 91, 0.5), 0 0 20px rgba(251, 240, 91, 0.3);
+    }
+
+    50% {
+        text-shadow: 0 0 20px rgba(251, 240, 91, 0.8), 0 0 40px rgba(251, 240, 91, 0.6);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fade-in-animation {
+        animation: none;
+        transform: none;
+    }
+
+    .nombre-animado {
+        animation: none;
+        text-shadow: 0 0 10px rgba(251, 240, 91, 0.5);
+        transform: none;
+    }
+}
+
+.contactame-animado {
+    animation: slideInDown 0.8s ease-out;
+    position: relative;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+.sticky-main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-botones {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.nav-btn {
+    transition: all 0.3s ease;
+    transform: translateY(0);
+    position: relative !important;
+    padding: 8px 20px;
+    font-size: 14px;
+}
+
+.nav-btn span {
+    font-size: 14px;
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(251, 240, 91, 0.3);
+}
+
+.nav-btn:active {
+    transform: translateY(0);
+}
+
+
+.hero-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    width: 100%;
+    flex-direction: row-reverse;
+}
+
+.foto-perfil-container {
+    flex-shrink: 0;
+    margin-top: 20px;
+}
+
+.foto-perfil {
+    width: 370px;
+    height: 370px;
+    object-fit: cover;
+    object-position: center 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+.foto-perfil:hover {
+    transform: scale(1.05);
+}
+
+.texto-hero {
+    flex: 1;
+}
+
+
+.footer {
+    width: 100%;
+    background-color: rgba(25, 25, 35, 0.95);
+    padding: 30px 0;
+    margin-top: 80px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-contenido {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+
+#emailText {
+    color: #FFF;
+    font-size: 16px;
+}
+
+.boton-copiar {
+    background-color: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.boton-copiar:hover {
+    transform: scale(1.1);
+}
+
+.boton-copiar:active {
+    transform: scale(0.95);
+}
+
+.boton-copiar svg {
+    width: 20px;
+    height: 20px;
+    fill: #FBF05B;
+    transition: fill 0.3s ease;
+}
+
+.boton-copiar:hover svg {
+    fill: #FFD700;
+}
+
+.mensaje-copiado {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FBF05B;
+    color: #2D2D3B;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    animation: aparecer 0.3s ease forwards;
+}
+
+@keyframes aparecer {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(5px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.footer-copyright {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    margin: 0;
+}
+
+
+@media (max-width: 968px) {
+    .hero-layout {
+        flex-direction: column !important;
+        text-align: center;
+        gap: 30px;
+        align-items: center !important;
+    }
+
+    .foto-perfil {
+        width: 270px !important;
+        height: 270px !important;
+        margin-bottom: -70px !important;
+        margin-top: 40px !important;
+    }
+
+    .foto-perfil-container {
+        margin-top: 0 !important;
+    }
+
+    .titulo_principal,
+    .subtitulo_principal,
+    .parrafo_principal {
+        text-align: center !important;
+    }
+
+    .parrafo_principal {
+        max-width: 100%;
+    }
+
+    .logos-container {
+        justify-content: center;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    #circulo_color1,
+    #circulo_color2 {
+        width: 200px !important;
+        height: 200px !important;
+    }
+
+    .sticky-main {
+        padding: 0.75rem 0;
+    }
+
+    .nav-botones {
+        gap: 0.8rem;
+        padding: 0 1rem;
+    }
+
+    .nav-btn {
+        min-width: 80px;
+        padding: 6px 12px !important;
+        font-size: 12px !important;
+    }
+
+    .nav-btn span {
+        font-size: 12px !important;
+    }
+
+    .contenido-inicio {
+        padding: 80px 15px 20px;
+    }
+
+    .titulo_principal {
+        font-size: clamp(32px, 8vw, 50px) !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitulo_principal {
+        font-size: clamp(18px, 5vw, 28px) !important;
+    }
+
+    .parrafo_principal {
+        font-size: clamp(14px, 4vw, 16px) !important;
+    }
+
+    .foto-perfil {
+        width: 250px !important;
+        height: 250px !important;
+        margin-bottom: -50px !important;
+        margin-top: -10px !important;
+    }
+
+    .logo_tecnologia_icono {
+        height: 28px !important;
+        width: 28px !important;
+    }
+
+    .logos-container {
+        gap: 12px;
+    }
+
+    #pagina_web_proyectos,
+    #pagina_web_acerca,
+    #pagina_web_contacto {
+        width: 95%;
+    }
+
+    .titulo_de_proyectos {
+        font-size: 28px !important;
+        margin: 60px auto 30px auto;
+    }
+
+    .acerca-container {
+        padding: 25px;
+        width: 75%;
+    }
+
+
+
+    #emailText {
+        font-size: 14px;
+        word-break: break-all;
+    }
+
+    .enlaces-redes {
+        flex-direction: column;
+        width: 85%;
+        align-items: center
+    }
+
+    .enlace-red {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .nav-botones {
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .nav-btn {
+        min-width: 70px;
+        padding: 5px 10px !important;
+        font-size: 11px !important;
+    }
+
+    .nav-btn span {
+        font-size: 11px !important;
+    }
+
+    .foto-perfil {
+        width: 250px !important;
+        height: 250px !important;
+        margin-bottom: -50px !important;
+        margin-top: -125px !important;
+    }
+
+    .logo_tecnologia_icono {
+        height: 24px !important;
+        width: 24px !important;
+    }
+}
