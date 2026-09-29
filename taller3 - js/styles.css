@@ -1,0 +1,142 @@
+body {
+    margin: 0;
+    background-color: #F3F4F6;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container-register {
+    padding: 40px 50px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 600px;
+    background-color: #1E293B;
+    color: rgb(255, 255, 255);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #334155;
+    margin-bottom: 20px;
+}
+
+.header-container h1 {
+    font-size: 24px;
+    margin: 0 0 5px 0;
+    text-align: right;
+}
+
+.header-container p {
+    text-align: right;
+}
+
+.container-register > div {
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #FFFFFF;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+}
+
+p {
+    color: #94A3B8;
+    font-size: 13px;
+    margin: 5px 0 0 0;
+}
+
+input {
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-color: #334155;
+    color: white;
+    height: 40px;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+input:focus {
+    border-color: #3B82F6;
+    background-color: #1E293B;
+}
+
+input.input-error {
+    border-color: #EF4444 !important;
+}
+
+img {
+    height: 60px;
+    width: auto;
+}
+
+span {
+    display: block;
+    color: #EF4444;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 5px;
+    min-height: 15px;
+}
+
+#alerta-verde {
+    display: none;
+    background-color: #10B981;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+button {
+    flex: 1;
+    height: 45px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#btn-guardar {
+    background-color: #3B82F6;
+    color: white;
+}
+
+#btn-guardar:hover {
+    background-color: #2563EB;
+}
+
+#btn-limpiar {
+    background-color: #475569;
+    color: white;
+}
+
+#btn-limpiar:hover {
+    background-color: #64748B;
+}
