@@ -1,0 +1,20 @@
+[
+  {
+    "codigo": "1791907982883",
+    "titulo": "Hacer la cama",
+    "descripcion": "tendemos y arreglamos la cama porfavor",
+    "fecha": "13/10/2026"
+  },
+  {
+    "codigo": "1791907999596",
+    "titulo": "Comer mi hamburguesa",
+    "descripcion": "deje una hamburguesa en la nevera debo de recalentarla y comerla",
+    "fecha": "13/10/2026"
+  },
+  {
+    "codigo": "1791908013422",
+    "titulo": "hacer base de datos postgresql",
+    "descripcion": "debería de empezar mi curso de base de datos",
+    "fecha": "13/10/2026"
+  }
+]

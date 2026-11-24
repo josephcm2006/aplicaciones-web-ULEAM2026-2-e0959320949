@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tareas>
+ <tarea codigo="1791908180339">
+ <titulo>Hacer la cama</titulo>
+
+<descripcion>tendemos y arreglamos la cama porfavor</descripcion>
+ <fecha>13/10/2026</fecha>
+ </tarea>
+ <tarea codigo="1791908191775">
+ <titulo>Comer mi hamburguesa</titulo>
+
+<descripcion>deje una hamburguesa en la nevera debo de recalentarla y comerla</descripcion>
+ <fecha>13/10/2026</fecha>
+ </tarea>
+ <tarea codigo="1791908204646">
+ <titulo>hacer base de datos postgresql</titulo>
+
+<descripcion>debería de empezar mi curso de base de datos</descripcion>
+ <fecha>13/10/2026</fecha>
+ </tarea>
+</tareas>
