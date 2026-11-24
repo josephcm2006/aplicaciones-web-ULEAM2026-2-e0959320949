@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Pacientes - Qwik</title>
+  <link rel="stylesheet" href="src/components/registro/registro.css" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="contenedor-registro">
+      <h2>Registro de Pacientes</h2>
+
+      <form class="formulario-paciente" id="form-paciente">
+        <div class="campo">
+          <label for="nombre">Nombre completo</label>
+          <input id="nombre" type="text" placeholder="Ej. Juan Pérez" />
+        </div>
+
+        <div class="campo">
+          <label for="cedula">Cédula (10 dígitos)</label>
+          <input id="cedula" type="text" maxlength="10" inputmode="numeric" placeholder="Ej. 1312345678" />
+        </div>
+
+        <div class="campo">
+          <label for="telefono">Teléfono (10 dígitos)</label>
+          <input id="telefono" type="text" maxlength="10" inputmode="numeric" placeholder="Ej. 0991234567" />
+        </div>
+
+        <div class="campo">
+          <label for="sangre">Tipo de sangre</label>
+          <select id="sangre">
+            <option value="">Seleccione un tipo de sangre</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+        </div>
+
+        <div id="contenedor-error"></div>
+
+        <div class="acciones-form">
+          <button type="submit" class="btn-primario" id="btn-submit">
+            Registrar
+          </button>
+          <button type="button" class="btn-secundario" id="btn-cancelar" style="display: none;">
+            Cancelar
+          </button>
+        </div>
+      </form>
+
+      <div class="lista-pacientes" id="lista-pacientes"></div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "pacientes_qwik_v1";
+
+    let estado = {
+      nombre: "",
+      cedula: "",
+      telefono: "",
+      sangre: "",
+      error: "",
+      editando: -1,
+      pacientes: []
+    };
+
+    // Cargar pacientes desde localStorage
+    try {
+      const guardado = localStorage.getItem(STORAGE_KEY);
+      if (guardado) {
+        const parsed = JSON.parse(guardado);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          estado.pacientes = parsed;
+        }
+      }
+    } catch (e) {
+      console.error("Error al cargar localStorage:", e);
+    }
+
+    // Datos iniciales de prueba si está vacío
+    if (estado.pacientes.length === 0) {
+      estado.pacientes = [
+        {
+          nombre: "Carlos Mendoza",
+          cedula: "1314567890",
+          telefono: "0998765432",
+          sangre: "O+"
+        },
+        {
+          nombre: "María Zambrano",
+          cedula: "1309876543",
+          telefono: "0987654321",
+          sangre: "A+"
+        }
+      ];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(estado.pacientes));
+    }
+
+    const inputNombre = document.getElementById("nombre");
+    const inputCedula = document.getElementById("cedula");
+    const inputTelefono = document.getElementById("telefono");
+    const selectSangre = document.getElementById("sangre");
+    const contenedorError = document.getElementById("contenedor-error");
+    const btnSubmit = document.getElementById("btn-submit");
+    const btnCancelar = document.getElementById("btn-cancelar");
+    const listaEl = document.getElementById("lista-pacientes");
+    const form = document.getElementById("form-paciente");
+
+    // Filtrar solo números para cédula y teléfono
+    inputCedula.addEventListener("input", (e) => {
+      e.target.value = e.target.value.replace(/\D/g, "").slice(0, 10);
+    });
+
+    inputTelefono.addEventListener("input", (e) => {
+      e.target.value = e.target.value.replace(/\D/g, "").slice(0, 10);
+    });
+
+    function guardarStorage() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(estado.pacientes));
+    }
+
+    function limpiar() {
+      estado.nombre = "";
+      estado.cedula = "";
+      estado.telefono = "";
+      estado.sangre = "";
+      estado.error = "";
+      estado.editando = -1;
+
+      inputNombre.value = "";
+      inputCedula.value = "";
+      inputTelefono.value = "";
+      selectSangre.value = "";
+      contenedorError.innerHTML = "";
+      btnSubmit.textContent = "Registrar";
+      btnCancelar.style.display = "none";
+    }
+
+    function renderLista() {
+      if (estado.pacientes.length === 0) {
+        listaEl.innerHTML = '<p style="color: #64748b;">No existen pacientes registrados.</p>';
+        return;
+      }
+
+      listaEl.innerHTML = estado.pacientes
+        .map(
+          (paciente, i) => `
+          <div class="fila-paciente">
+            <div>
+              <strong>${paciente.nombre}</strong> — Cédula: ${paciente.cedula} |
+              Tel: ${paciente.telefono} | Sangre: ${paciente.sangre}
+            </div>
+            <div class="acciones-fila">
+              <button
+                type="button"
+                class="btn-secundario"
+                onclick="editarPaciente(${i})"
+              >
+                Editar
+              </button>
+              <button
+                type="button"
+                class="btn-peligro"
+                onclick="eliminarPaciente(${i})"
+              >
+                Eliminar
+              </button>
+            </div>
+          </div>
+        `
+        )
+        .join("");
+    }
+
+    window.editarPaciente = function (i) {
+      const p = estado.pacientes[i];
+      if (!p) return;
+
+      estado.nombre = p.nombre;
+      estado.cedula = p.cedula;
+      estado.telefono = p.telefono;
+      estado.sangre = p.sangre;
+      estado.error = "";
+      estado.editando = i;
+
+      inputNombre.value = p.nombre;
+      inputCedula.value = p.cedula;
+      inputTelefono.value = p.telefono;
+      selectSangre.value = p.sangre;
+      contenedorError.innerHTML = "";
+
+      btnSubmit.textContent = "Actualizar";
+      btnCancelar.style.display = "inline-block";
+      inputNombre.focus();
+    };
+
+    window.eliminarPaciente = function (i) {
+      estado.pacientes.splice(i, 1);
+      if (estado.editando === i) {
+        limpiar();
+      } else if (estado.editando > i) {
+        estado.editando -= 1;
+      }
+      guardarStorage();
+      renderLista();
+    };
+
+    btnCancelar.addEventListener("click", limpiar);
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const nombre = inputNombre.value.trim();
+      const cedula = inputCedula.value.trim();
+      const telefono = inputTelefono.value.trim();
+      const sangre = selectSangre.value.trim();
+
+      if (!nombre || !cedula || !telefono || !sangre) {
+        contenedorError.innerHTML = '<div class="mensaje-error">Todos los campos son obligatorios.</div>';
+        return;
+      }
+
+      if (!/^\d{10}$/.test(cedula)) {
+        contenedorError.innerHTML = '<div class="mensaje-error">La cédula debe tener exactamente 10 números.</div>';
+        return;
+      }
+
+      if (!/^\d{10}$/.test(telefono)) {
+        contenedorError.innerHTML = '<div class="mensaje-error">El teléfono debe tener exactamente 10 números.</div>';
+        return;
+      }
+
+      const paciente = { nombre, cedula, telefono, sangre };
+
+      if (estado.editando >= 0) {
+        estado.pacientes[estado.editando] = paciente;
+      } else {
+        estado.pacientes.push(paciente);
+      }
+
+      guardarStorage();
+      limpiar();
+      renderLista();
+    });
+
+    // Renderizar inicialmente
+    renderLista();
+  </script>
+</body>
+
+</html>

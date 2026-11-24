@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Tutorías - Angular</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+
+    <app-root>
+        <div class="contenedor">
+
+            <header>
+                <h1>Sistema de Gestión de Tutorías</h1>
+                <p>Administración de tutorías académicas</p>
+            </header>
+
+            <section class="resumen">
+                <h2>Mis tutorías</h2>
+
+                <p>
+                    Total de tutorías:
+                    <strong id="total-tutorias">3</strong>
+                </p>
+            </section>
+
+            <section class="registro">
+                <h2>Registrar tutoría</h2>
+
+                <input type="text" id="materia-input" placeholder="Nombre de la materia">
+
+                <button type="button" id="btn-agregar">
+                    Agregar tutoría
+                </button>
+            </section>
+
+            <section class="listado">
+                <h2>Listado de tutorías</h2>
+
+                <div id="contenedor-tutorias"></div>
+            </section>
+
+        </div>
+    </app-root>
+
+    <script>
+        // Estado y lógica idénticos al componente app.ts
+        let tutorias = [
+            {
+                id: 1,
+                materia: 'Bases de Datos',
+                estado: 'Confirmada'
+            },
+            {
+                id: 2,
+                materia: 'Ingeniería de Software',
+                estado: 'Pendiente'
+            },
+            {
+                id: 3,
+                materia: 'Aplicaciones Web',
+                estado: 'Confirmada'
+            }
+        ];
+
+        function render() {
+            const totalEl = document.getElementById('total-tutorias');
+            const listaEl = document.getElementById('contenedor-tutorias');
+            totalEl.textContent = tutorias.length;
+
+            if (tutorias.length === 0) {
+                listaEl.innerHTML = '<p>No existen tutorías registradas.</p>';
+                return;
+            }
+
+            listaEl.innerHTML = tutorias.map(tutoria => `
+                <article class="tarjeta">
+                    <div>
+                        <h3>${tutoria.materia}</h3>
+                        <p>Estado: ${tutoria.estado}</p>
+                    </div>
+                    <button type="button" onclick="cambiarEstado(${tutoria.id})">
+                        Cambiar estado
+                    </button>
+                </article>
+            `).join('');
+        }
+
+        function agregar(materia) {
+            if (!materia || materia.trim() === '') {
+                return;
+            }
+
+            tutorias.push({
+                id: Date.now(),
+                materia: materia.trim(),
+                estado: 'Pendiente'
+            });
+
+            render();
+        }
+
+        function cambiarEstado(id) {
+            tutorias = tutorias.map(tutoria =>
+                tutoria.id === id
+                    ? {
+                        ...tutoria,
+                        estado: tutoria.estado === 'Pendiente' ? 'Confirmada' : 'Pendiente'
+                    }
+                    : tutoria
+            );
+
+            render();
+        }
+
+        const inputMateria = document.getElementById('materia-input');
+        const btnAgregar = document.getElementById('btn-agregar');
+
+        btnAgregar.addEventListener('click', () => {
+            agregar(inputMateria.value);
+            inputMateria.value = '';
+            inputMateria.focus();
+        });
+
+        inputMateria.addEventListener('keyup', (evento) => {
+            if (evento.key === 'Enter') {
+                agregar(inputMateria.value);
+                inputMateria.value = '';
+            }
+        });
+
+        // Inicializar vista inicial
+        render();
+    </script>
+
+</body>
+
+</html>
